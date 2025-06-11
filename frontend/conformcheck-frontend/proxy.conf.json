@@ -1,0 +1,7 @@
+{
+  "/upload": {
+    "target": "https://turbo-engine-975gvvqp95xq3prrw-3000.app.github.dev/",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

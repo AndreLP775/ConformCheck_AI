@@ -30,13 +30,35 @@ onFileSelected(event: any): void {
 
 
 enviarArquivo(): void {
-    if (this.selectedFile) {
-      console.log('Enviando arquivo:', this.selectedFile.name);
-      // Aqui futuramente vamos fazer o upload real
-    } else {
-      console.log('Nenhum arquivo selecionado.');
-    }
+  if (!this.selectedFile) {
+    this.mensagem = 'Nenhum arquivo selecionado.';
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('file', this.selectedFile);
+
+fetch('/upload/norma', {
+  method: 'POST',
+  body: formData,
+})
+
+    .then(async (res) => {
+      if (!res.ok) {
+        const error = await res.text();
+        throw new Error(error);
+      }
+      return res.json();
+    })
+    .then((data) => {
+      this.mensagem = `✅ Arquivo enviado com sucesso: ${data.filename}`;
+      this.selectedFile = null;
+    })
+    .catch((error) => {
+      this.mensagem = `❌ Erro ao enviar arquivo: ${error.message}`;
+    });
 }
+
 
 limparArquivo(): void {
   this.selectedFile = null;

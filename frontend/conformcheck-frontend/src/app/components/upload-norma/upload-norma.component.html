@@ -1,0 +1,27 @@
+<mat-card class="upload-container">
+  <h2 class="titulo">Upload de Normativa</h2>
+  <p class="subtitulo">Faça upload dos documentos normativos para análise de conformidade</p>
+
+  <div class="upload-box">
+    <button mat-stroked-button color="primary" (click)="fileInput?.click()">
+      Selecionar Arquivo
+    </button>
+    <input #fileInput type="file" hidden (change)="onFileSelected($event)" />
+  </div>
+
+  <div class="arquivo-info" *ngIf="selectedFile">
+    <mat-icon>description</mat-icon>
+    <span>{{ selectedFile.name }}</span>
+  </div>
+
+  <div class="botoes">
+    <button mat-raised-button color="primary" (click)="enviarArquivo()" [disabled]="!selectedFile">
+      Enviar
+    </button>
+    <button mat-button color="warn" (click)="limparArquivo()" *ngIf="selectedFile">
+      Limpar
+    </button>
+  </div>
+
+  <p class="mensagem" *ngIf="mensagem">{{ mensagem }}</p>
+</mat-card>

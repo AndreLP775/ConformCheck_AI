@@ -9,7 +9,6 @@ export class UploadNormaComponent {
 
 mensagem: string = '';
 
-
 selectedFile: File | null = null;
 
 onFileSelected(event: any): void {

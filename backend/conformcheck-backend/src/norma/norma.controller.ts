@@ -1,0 +1,17 @@
+import { Controller, Get, Delete, Param } from '@nestjs/common';
+import { NormaService } from './norma.service';
+
+@Controller('normas')
+export class NormaController {
+  constructor(private readonly normaService: NormaService) {}
+
+  @Get()
+  getNormas(): string[] {
+    return this.normaService.getNormas();
+  }
+
+  @Delete(':fileName')
+  deleteNorma(@Param('fileName') fileName: string): void {
+    this.normaService.deleteNorma(fileName);
+  }
+}

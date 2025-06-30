@@ -1,6 +1,6 @@
 {
   "/upload": {
-    "target": "https://turbo-engine-975gvvqp95xq3prrw-3000.app.github.dev/",
+    "target": "http://localhost:3000",
     "secure": false,
     "changeOrigin": true
   }

@@ -1,0 +1,20 @@
+.container {
+  padding: 20px;
+}
+
+.norma-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.norma-table th,
+.norma-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.norma-table th {
+  background-color: #f4f4f4;
+}

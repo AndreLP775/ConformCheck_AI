@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { ListarNormasComponent } from './components/listar-normas/listar-normas.component';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'conformcheck-frontend';
+  @ViewChild(ListarNormasComponent) listarNormasComponent?: ListarNormasComponent;
+
+  onUploadConcluido(): void {
+    this.listarNormasComponent?.carregarNormas();
+  }
 }

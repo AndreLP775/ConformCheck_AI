@@ -1,0 +1,23 @@
+<div class="container">
+  <h2>Normas Cadastradas</h2>
+
+  <div *ngIf="loading">Carregando normas...</div>
+  <div *ngIf="error">{{ error }}</div>
+
+  <table *ngIf="!loading && normas.length > 0" class="norma-table">
+    <thead>
+      <tr>
+        <th>Nome do Arquivo</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let norma of normas">
+        <td>{{ norma }}</td>
+        <td><button (click)="deleteNorma(norma)">Excluir</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading && normas.length === 0">Nenhuma norma encontrada.</div>
+</div>

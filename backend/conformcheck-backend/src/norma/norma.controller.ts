@@ -1,5 +1,7 @@
-import { Controller, Get, Delete, Param } from '@nestjs/common';
+import { Controller, Get, Delete, Param, NotFoundException } from '@nestjs/common';
 import { NormaService } from './norma.service';
+import { join } from 'path';
+import { existsSync, unlinkSync } from 'fs';
 
 @Controller('normas')
 export class NormaController {
@@ -11,7 +13,7 @@ export class NormaController {
   }
 
   @Delete(':fileName')
-  deleteNorma(@Param('fileName') fileName: string): void {
-    this.normaService.deleteNorma(fileName);
+  deleteNorma(@Param('fileName') fileName: string): string {
+    return this.normaService.deleteNorma(fileName);
   }
 }

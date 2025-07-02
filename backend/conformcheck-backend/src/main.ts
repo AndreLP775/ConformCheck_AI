@@ -5,8 +5,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: 'https://turbo-engine-975gvwqp95xq3prrw-4200.app.github.dev',
-    methods: ['GET', 'POST'],
+    origin: 'http://localhost:4200',
+    methods: ['GET', 'POST', 'DELETE'],
     credentials: false,
   });
 

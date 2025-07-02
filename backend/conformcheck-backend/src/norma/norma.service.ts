@@ -1,22 +1,23 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { readdirSync, existsSync, unlinkSync } from 'fs';
 import { join } from 'path';
+import { existsSync, unlinkSync, readdirSync } from 'fs';
 
 @Injectable()
 export class NormaService {
   getNormas(): string[] {
-    const path = join(__dirname, '..', '..', 'uploads', 'normas');
-    if (!existsSync(path)) {
-      return [];
-    }
-    return readdirSync(path);
+    const dirPath = join(__dirname, '..', '..', 'uploads', 'normas');
+    return readdirSync(dirPath);
   }
 
-  deleteNorma(fileName: string): void {
-    const path = join(__dirname, '..', '..', 'uploads', 'normas', fileName);
-    if (!existsSync(path)) {
-      throw new NotFoundException('Norma não encontrada');
-    }
-    unlinkSync(path);
+deleteNorma(fileName: string): string {
+  const decodedFileName = decodeURIComponent(fileName);
+  const filePath = join(__dirname, '..', '..', 'uploads', 'normas', decodedFileName);
+
+  if (existsSync(filePath)) {
+    unlinkSync(filePath);
+    return 'Arquivo excluído com sucesso.';
+  } else {
+    throw new NotFoundException(`Arquivo "${decodedFileName}" não encontrado.`);
   }
+}
 }

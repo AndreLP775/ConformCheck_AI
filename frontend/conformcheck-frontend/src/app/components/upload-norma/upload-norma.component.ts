@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-upload-norma',
@@ -7,41 +7,40 @@ import { Component } from '@angular/core';
 })
 export class UploadNormaComponent {
 
-mensagem: string = '';
+  mensagem: string = '';
+  selectedFile: File | null = null;
 
-selectedFile: File | null = null;
+  @Output() uploadConcluido = new EventEmitter<void>();
 
-onFileSelected(event: any): void {
-  const file = event.target.files[0];
-  if (file) {
-    const extensao = file.name.split('.').pop()?.toLowerCase();
-    const extensoesPermitidas = ['pdf', 'docx'];
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      const extensao = file.name.split('.').pop()?.toLowerCase();
+      const extensoesPermitidas = ['pdf', 'docx'];
 
-    if (extensao && extensoesPermitidas.includes(extensao)) {
-      this.selectedFile = file;
-      this.mensagem = `Arquivo válido selecionado: ${file.name}`;
-    } else {
-      this.selectedFile = null;
-      this.mensagem = 'Por favor, selecione um arquivo nos formatos PDF ou DOCX.';
+      if (extensao && extensoesPermitidas.includes(extensao)) {
+        this.selectedFile = file;
+        this.mensagem = `Arquivo válido selecionado: ${file.name}`;
+      } else {
+        this.selectedFile = null;
+        this.mensagem = 'Por favor, selecione um arquivo nos formatos PDF ou DOCX.';
+      }
     }
   }
-}
 
+  enviarArquivo(): void {
+    if (!this.selectedFile) {
+      this.mensagem = 'Nenhum arquivo selecionado.';
+      return;
+    }
 
-enviarArquivo(): void {
-  if (!this.selectedFile) {
-    this.mensagem = 'Nenhum arquivo selecionado.';
-    return;
-  }
+    const formData = new FormData();
+    formData.append('file', this.selectedFile);
 
-  const formData = new FormData();
-  formData.append('file', this.selectedFile);
-
-fetch('/upload/norma', {
-  method: 'POST',
-  body: formData,
-})
-
+    fetch('/upload/norma', {
+      method: 'POST',
+      body: formData,
+    })
     .then(async (res) => {
       if (!res.ok) {
         const error = await res.text();
@@ -52,17 +51,15 @@ fetch('/upload/norma', {
     .then((data) => {
       this.mensagem = `✅ Arquivo enviado com sucesso: ${data.filename}`;
       this.selectedFile = null;
+      this.uploadConcluido.emit();  // ← aqui está o passo A.3
     })
     .catch((error) => {
       this.mensagem = `❌ Erro ao enviar arquivo: ${error.message}`;
     });
-}
+  }
 
-
-limparArquivo(): void {
-  this.selectedFile = null;
-  this.mensagem = '';
-}
-
-
+  limparArquivo(): void {
+    this.selectedFile = null;
+    this.mensagem = '';
+  }
 }

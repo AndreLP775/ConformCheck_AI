@@ -1,0 +1,79 @@
+{
+  "nome_arquivo": "PE_487_02_VerificaÃ§Ã£o_ESG.pdf",
+  "perguntas": [
+    {
+      "pergunta": "A organização possui um processo de identificação de atendimento da legislação e requisitos regulamentares?",
+      "tipo": "Obrigatório"
+    },
+    {
+      "pergunta": "A organização trata os critérios ESG de forma integrada com a gestão?",
+      "tipo": "Obrigatório"
+    },
+    {
+      "pergunta": "A organização possui um plano de ação para atingir o patamar mínimo de maturidade ESG?",
+      "tipo": "Obrigatório"
+    },
+    {
+      "pergunta": "A organização realiza a autoavaliação dos critérios ESG?",
+      "tipo": "Recomendável"
+    },
+    {
+      "pergunta": "A organização possui um inventário de GEE verificado externamente?",
+      "tipo": "Obrigatório"
+    },
+    {
+      "pergunta": "A organização possui um plano de adaptação às mudanças climáticas?",
+      "tipo": "Recomendável"
+    },
+    {
+      "pergunta": "A organização possui controle de seu consumo energético?",
+      "tipo": "Recomendável"
+    },
+    {
+      "pergunta": "A organização mapeia o consumo de água com suas atividades?",
+      "tipo": "Recomendável"
+    },
+    {
+      "pergunta": "A organização realiza a gestão de efluentes de acordo com a legislação?",
+      "tipo": "Obrigatório"
+    },
+    {
+      "pergunta": "A organização considera a conservação e uso sustentável da biodiversidade em suas práticas gerenciais?",
+      "tipo": "Recomendável"
+    },
+    {
+      "pergunta": "A organização promove o engajamento de partes interessadas nas ações relacionadas ao uso sustentável do solo?",
+      "tipo": "Recomendável"
+    },
+    {
+      "pergunta": "A organização estabelece indicadores, metas e planos de ação para a redução do consumo de água?",
+      "tipo": "Recomendável"
+    },
+    {
+      "pergunta": "A organização possui um sistema de gestão de energia implementado?",
+      "tipo": "Recomendável"
+    },
+    {
+      "pergunta": "A organização realiza monitoramento periódico dos efluentes gerados?",
+      "tipo": "Recomendável"
+    },
+    {
+      "pergunta": "A organização possui ações dirigidas às partes externas no contexto do uso da água?",
+      "tipo": "Recomendável"
+    },
+    {
+      "pergunta": "A organização realiza a comunicação de seus planos e resultados relacionados a ESG?",
+      "tipo": "Recomendável"
+    },
+    {
+      "pergunta": "A organização estabelece objetivos e metas para a mitigação de emissões de GEE?",
+      "tipo": "Recomendável"
+    },
+    {
+      "pergunta": "A organização promove inovação tecnológica para maximizar o valor do negócio em relação a ESG?",
+      "tipo": "Recomendável"
+    }
+  ],
+  "data_criacao": "2025-12-09T11:42:41.632Z",
+  "nome_norma": "PE_487_02_VerificaÃ§Ã£o_ESG.pdf"
+}

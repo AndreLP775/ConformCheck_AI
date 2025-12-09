@@ -5,7 +5,10 @@ import { UploadModule } from './upload/upload.module';
 import { NormaModule } from './norma/norma.module';
 
 @Module({
-  imports: [UploadModule, NormaModule],
+  imports: [
+    UploadModule,
+    NormaModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -1,27 +1,97 @@
-<mat-card class="upload-container">
-  <h2 class="titulo">Upload de Normativa</h2>
-  <p class="subtitulo">Faça upload dos documentos normativos para análise de conformidade</p>
+<div style="display: flex; gap: 20px; align-items: flex-start; height: 100vh; padding: 10px;">
+  
+  <mat-card style="width: 250px; background-color: #f5f5f5;">
+    <h3 style="padding: 10px; margin: 0; border-bottom: 1px solid #ddd;">
+      <mat-icon style="vertical-align: middle;">history</mat-icon> Normas Salvas
+    </h3>
+    <mat-list role="list">
+      <mat-list-item *ngFor="let q of questionariosSalvos" 
+                     (click)="carregarChecklistSalvo(q)"
+                     style="cursor: pointer; border-bottom: 1px solid #eee;"
+                     [style.background-color]="questionarioAtivo === q ? '#e3f2fd' : 'transparent'">
+        <mat-icon matListItemIcon>assignment</mat-icon>
+        <div matListItemTitle style="font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+          {{ q }}
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </mat-card>
 
-  <div class="upload-box">
-    <button mat-stroked-button color="primary" (click)="fileInput?.click()">
-      Selecionar Arquivo
-    </button>
-    <input #fileInput type="file" hidden (change)="onFileSelected($event)" />
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
+    
+    <mat-card class="upload-container">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <h2 class="titulo" style="margin: 0;">Novo Checklist</h2>
+          <p class="subtitulo" style="margin: 0;">Envie uma norma PDF para criar um novo questionário.</p>
+        </div>
+        <div class="botoes">
+          <button mat-stroked-button color="primary" (click)="fileInputNorma.click()">
+            Selecionar PDF
+          </button>
+          <input #fileInputNorma type="file" hidden (change)="onFileSelected($event)" />
+          
+          <button mat-raised-button color="primary" (click)="enviarArquivo()" [disabled]="!selectedFile" style="margin-left: 10px;">
+            <mat-icon>auto_awesome</mat-icon> Gerar com IA
+          </button>
+        </div>
+      </div>
+      <p class="mensagem" *ngIf="mensagem" style="margin-top: 10px; color: #1976d2;">{{ mensagem }}</p>
+    </mat-card>
+
+    <div *ngIf="checklist.length > 0">
+      <h2 style="color: #3f51b5; display: flex; align-items: center;">
+        <mat-icon style="margin-right: 10px;">playlist_add_check</mat-icon> 
+        Questionário Ativo
+      </h2>
+      
+      <mat-accordion multi>
+        <mat-expansion-panel *ngFor="let item of checklist">
+          
+          <mat-expansion-panel-header>
+            <mat-panel-title style="max-width: 100px;">
+              <strong>Item {{ item.id }}</strong>
+            </mat-panel-title>
+            <mat-panel-description style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+              <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 500px;">
+                {{ item.pergunta }}
+              </span>
+              <span style="padding: 2px 8px; border-radius: 10px; font-size: 10px; color: white;"
+                    [ngStyle]="{'background-color': item.tipo === 'Obrigatório' ? '#d32f2f' : (item.tipo === 'Recomendável' ? '#fbc02d' : '#607d8b')}">
+                {{ item.tipo | uppercase }}
+              </span>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+  
+          <div style="padding: 10px; background-color: #f9f9f9;">
+            <p style="font-weight: bold;">Pergunta Completa:</p>
+            <p>{{ item.pergunta }}</p>
+            
+            <mat-divider style="margin: 15px 0;"></mat-divider>
+
+            <mat-form-field appearance="outline" style="width: 100%;">
+              <mat-label>Análise da IA / Evidência</mat-label>
+              <textarea matInput rows="5" [(ngModel)]="item.resposta" 
+                        [placeholder]="item.analisando ? 'Processando...' : 'Aguardando evidências...'">
+              </textarea>
+            </mat-form-field>
+
+            <div style="text-align: right; margin-top: 10px;">
+              <span *ngIf="item.analisando" style="margin-right: 10px; color: #1976d2; font-weight: bold;">
+                🤖 Analisando documento...
+              </span>
+
+              <button mat-raised-button color="accent" (click)="evidenciaInput.click()" [disabled]="item.analisando">
+                <mat-icon>upload_file</mat-icon> 
+                Subir Evidência para este item
+              </button>
+              
+              <input #evidenciaInput type="file" hidden (change)="uploadEvidencia($event, item)" />
+            </div>
+          </div>
+  
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
   </div>
-
-  <div class="arquivo-info" *ngIf="selectedFile">
-    <mat-icon>description</mat-icon>
-    <span>{{ selectedFile.name }}</span>
-  </div>
-
-  <div class="botoes">
-    <button mat-raised-button color="primary" (click)="enviarArquivo()" [disabled]="!selectedFile">
-      Enviar
-    </button>
-    <button mat-button color="warn" (click)="limparArquivo()" *ngIf="selectedFile">
-      Limpar
-    </button>
-  </div>
-
-  <p class="mensagem" *ngIf="mensagem">{{ mensagem }}</p>
-</mat-card>
+</div>

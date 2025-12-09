@@ -1,18 +1,49 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { NormaService } from './norma.service';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import * as fs from 'fs';
+import * as path from 'path';
 
-describe('NormaService', () => {
-  let service: NormaService;
+@Injectable()
+export class NormaService {
+  private readonly databasePath = path.join(process.cwd(), 'database');
+  private readonly normasPath = path.join(process.cwd(), 'uploads/normas');
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [NormaService],
-    }).compile();
+  // --- Funções de Normas (PDFs) ---
+  getNormas(): string[] {
+    if (!fs.existsSync(this.normasPath)) return [];
+    return fs.readdirSync(this.normasPath);
+  }
 
-    service = module.get<NormaService>(NormaService);
-  });
+  deleteNorma(fileName: string): string {
+    const filePath = path.join(this.normasPath, fileName);
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
+      return `Norma ${fileName} removida com sucesso.`;
+    }
+    return 'Arquivo não encontrado.';
+  }
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
-  });
-});
+  extrairConteudo(fileName: string): string {
+    return 'Conteúdo simulado por enquanto.';
+  }
+
+  // --- NOVAS FUNÇÕES: Questionários (Checklists) ---
+
+  listarChecklists(): string[] {
+    // Cria a pasta database se não existir
+    if (!fs.existsSync(this.databasePath)) {
+      fs.mkdirSync(this.databasePath);
+    }
+    
+    // Retorna lista de arquivos .json
+    return fs.readdirSync(this.databasePath).filter(file => file.endsWith('.json'));
+  }
+
+  carregarChecklist(fileName: string): any {
+    const filePath = path.join(this.databasePath, fileName);
+    if (!fs.existsSync(filePath)) {
+      throw new NotFoundException('Checklist não encontrado');
+    }
+    const conteudo = fs.readFileSync(filePath, 'utf-8');
+    return JSON.parse(conteudo);
+  }
+}

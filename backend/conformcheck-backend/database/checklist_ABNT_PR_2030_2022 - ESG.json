@@ -1,0 +1,59 @@
+{
+  "nome_arquivo": "ABNT_PR_2030_2022 - ESG.pdf",
+  "perguntas": [
+    {
+      "pergunta": "A organização possui um entendimento claro sobre os conceitos de ESG?",
+      "tipo": "Obrigatório"
+    },
+    {
+      "pergunta": "A organização estabeleceu critérios ambientais, sociais e de governança relevantes para seu negócio?",
+      "tipo": "Obrigatório"
+    },
+    {
+      "pergunta": "A organização implementou um modelo de avaliação para identificar seu estágio de maturidade em relação aos critérios ESG?",
+      "tipo": "Obrigatório"
+    },
+    {
+      "pergunta": "A organização possui um plano estratégico que inclui a intenção de integrar práticas ESG?",
+      "tipo": "Recomendável"
+    },
+    {
+      "pergunta": "A organização realiza diagnósticos regulares sobre suas práticas ESG?",
+      "tipo": "Recomendável"
+    },
+    {
+      "pergunta": "A organização tem um processo para medir e monitorar o desempenho em ESG?",
+      "tipo": "Obrigatório"
+    },
+    {
+      "pergunta": "A organização comunica suas práticas e resultados em ESG para as partes interessadas?",
+      "tipo": "Recomendável"
+    },
+    {
+      "pergunta": "A organização considera a materialidade dos tópicos ESG em suas decisões?",
+      "tipo": "Obrigatório"
+    },
+    {
+      "pergunta": "A organização está ciente dos documentos normativos orientadores relacionados a ESG?",
+      "tipo": "Geral"
+    },
+    {
+      "pergunta": "A organização promove a diversidade, equidade e inclusão em suas práticas?",
+      "tipo": "Recomendável"
+    },
+    {
+      "pergunta": "A organização possui práticas de governança corporativa estabelecidas?",
+      "tipo": "Obrigatório"
+    },
+    {
+      "pergunta": "A organização realiza due diligence para identificar e mitigar impactos adversos?",
+      "tipo": "Recomendável"
+    },
+    {
+      "pergunta": "A organização adota princípios de economia circular em suas operações?",
+      "tipo": "Recomendável"
+    }
+  ],
+  "data_criacao": "2025-12-09T11:45:30.233Z",
+  "nome_norma": "ABNT_PR_2030_2022 - ESG.pdf"
+}
